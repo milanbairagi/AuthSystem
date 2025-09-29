@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api";
 import { clearTokens } from "../tokens";
@@ -18,7 +18,7 @@ const Register = () => {
     e.preventDefault();
 
     clearTokens();
-    
+
     try {
       const res = await api.post("/accounts/register/", { 
         first_name: firstName, 
@@ -81,6 +81,9 @@ const Register = () => {
         </button>
 
       </form>
+
+      <p className="text-gray-500">Already have an account? <Link to="/login" className="text-blue-500 underline">Login</Link></p>
+
     </div>
   )
 };

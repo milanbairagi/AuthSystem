@@ -1,31 +1,57 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 import api from "../api";
+import { getTokens, clearTokens } from "../tokens";
+
 
 
 const Home = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const { accessToken } = getTokens();
+    if (!accessToken) {
+      return;
+    }
+
     const getUser = async () => {
       try {
         const res = await api.get("/accounts/me/");
-        console.log("User data:", res.data);
         setUser(res.data);
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        if (error.response && error.response.status === 401) {
+          setUser(null);
+          clearTokens();
+        }
       }
     };
 
     getUser();
   }, []);
 
+  const logout = useCallback(() => {
+    clearTokens();
+    setUser(null);
+  });
+
   
   return (
     <div>
-      <h1>Home Page</h1>
-      {user && (
-        <div>{JSON.stringify(user)}</div>
+      {user ? (
+        <div>
+          <h2 className="text-2xl font-bold">Welcome, {user.first_name} {user.last_name}!</h2>
+          <p>Email: {user.email}</p>
+          <button className="bg-gray-500 text-white px-4 py-2 rounded mt-4" onClick={logout}>Log Out</button>
+        </div>
+      ) : (
+        <div>
+          <h2 className="text-2xl font-bold">Welcome to the Home Page</h2>
+          <p>Please log in to see your details.</p>
+          <Link to="/login" className="text-blue-500 underline">Go to Login</Link>
+          <br />
+          <Link to="/register" className="text-blue-500 underline">Go to Register</Link>
+        </div>
       )}
     </div>
     

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api";
 import { setTokens, clearTokens } from "../tokens";
@@ -56,6 +56,8 @@ const Login = () => {
         </button>
 
       </form>
+
+      <p className="text-gray-500">Don't have an account? <Link to="/register" className="text-blue-500 underline">Register</Link></p>
     </div>
   )
 };

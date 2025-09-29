@@ -8,8 +8,8 @@ const api = axios.create({
   timeout: 10000,
 })
 
-axios.interceptors.request.use((config) => {
-  const { accessToken } = getTokens();
+api.interceptors.request.use((config) => {
+  const { accessToken, refreshToken } = getTokens();
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }

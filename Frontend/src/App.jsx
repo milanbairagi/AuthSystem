@@ -3,13 +3,7 @@ import { RouterProvider } from "react-router/dom";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
-
-const Home = () => {
-  return (
-    <div>Home Page</div>
-  );
-};
+import Home from "./pages/Home";
 
 
 function App() {

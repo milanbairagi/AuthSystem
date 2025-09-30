@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import api from "../api";
 import { getTokens, clearTokens } from "../tokens";
-
+import { SecondaryButton } from "../components/Button";
 
 
 const Home = () => {
@@ -42,7 +42,7 @@ const Home = () => {
         <div>
           <h2 className="text-2xl font-bold">Welcome, {user.first_name} {user.last_name}!</h2>
           <p>Email: {user.email}</p>
-          <button className="bg-gray-500 text-white px-4 py-2 rounded mt-4" onClick={logout}>Log Out</button>
+          <SecondaryButton text="Log out" onClick={logout} />
         </div>
       ) : (
         <div>

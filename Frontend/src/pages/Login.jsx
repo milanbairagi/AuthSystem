@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../api";
 import { setTokens, clearTokens } from "../tokens";
 import FormField from "../components/FormField";
+import PrimaryButton from "../components/Button";
 
 
 const Login = () => {
@@ -51,9 +52,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
-          Login
-        </button>
+        <PrimaryButton text="Login" type="submit" />
 
       </form>
 

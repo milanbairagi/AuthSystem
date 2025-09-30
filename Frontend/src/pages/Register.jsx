@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../api";
 import { clearTokens } from "../tokens";
 import FormField from "../components/FormField";
+import PrimaryButton from "../components/Button"
 
 
 const Register = () => {
@@ -75,10 +76,7 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
-          Register
-        </button>
+        <PrimaryButton text="Register" type="submit" />
 
       </form>
 

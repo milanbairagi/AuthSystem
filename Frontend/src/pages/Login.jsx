@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api";
-import { setTokens, clearTokens } from "../tokens";
+import { useUser } from "../contexts/userContext";
 import FormField from "../components/FormField";
 import PrimaryButton from "../components/Button";
 
@@ -11,23 +11,33 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { user, loginUser, logoutUser } = useUser();
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // If already logged in, redirect to home
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    clearTokens();
+    logoutUser();
 
     try {
-      const res = await api.post("/token/", { email, password });
-      console.log("Login successful:", res.data);
-      setTokens(res.data.access, res.data.refresh);
+      const res = await api.post("v1/token/", { email, password });
+      await loginUser(res.data);
       navigate("/");
 
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
+
+
   
   return (
     <div>

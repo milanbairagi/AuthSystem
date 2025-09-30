@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api";
-import { clearTokens } from "../tokens";
+import { useUser } from "../contexts/userContext";
 import FormField from "../components/FormField";
 import PrimaryButton from "../components/Button"
 
@@ -12,13 +12,23 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { user, logoutUser } = useUser();
   
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // If already logged in, redirect to home
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    clearTokens();
+    // Ensure logged out before registering a new user
+    logoutUser();
 
     try {
       const res = await api.post("/accounts/register/", { 

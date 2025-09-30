@@ -10,6 +10,7 @@ import PrimaryButton from "../components/Button";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { user, loginUser, logoutUser } = useUser();
 
@@ -28,15 +29,17 @@ const Login = () => {
     logoutUser();
 
     try {
+      setLoading(true);
       const res = await api.post("v1/token/", { email, password });
       await loginUser(res.data);
       navigate("/");
 
     } catch (error) {
       console.error("Login failed:", error);
+    } finally {
+      setLoading(false);
     }
   };
-
 
   
   return (
@@ -62,7 +65,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <PrimaryButton text="Login" type="submit" />
+        <PrimaryButton text="Login" type="submit" loading={loading} loadingText="Logging in..." />
 
       </form>
 

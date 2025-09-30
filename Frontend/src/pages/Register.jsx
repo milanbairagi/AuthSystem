@@ -12,6 +12,7 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { user, logoutUser } = useUser();
   
@@ -31,6 +32,7 @@ const Register = () => {
     logoutUser();
 
     try {
+      setLoading(true);
       const res = await api.post("/accounts/register/", { 
         first_name: firstName, 
         last_name: lastName, 
@@ -41,6 +43,8 @@ const Register = () => {
       navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,7 +90,7 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <PrimaryButton text="Register" type="submit" />
+        <PrimaryButton text="Register" type="submit" loading={loading} loadingText="Registering..." />
 
       </form>
 

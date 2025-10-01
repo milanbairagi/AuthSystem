@@ -14,6 +14,7 @@ const TaskCard = ({ task, handleClick, handleUpdate, handleDelete }) => {
     const nextIndex = (currentIndex + 1) % status.length;
     const newStatus = status[nextIndex];
 
+    task.status = newStatus;
     handleUpdate({ ...task, status: newStatus });
   };
 

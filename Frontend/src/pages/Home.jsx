@@ -66,6 +66,10 @@ const Home = () => {
     }
   }, [user, loading]);
 
+  useEffect(() => {
+    console.log("Tasks updated:");
+  }, [tasks]);
+
 
   if (loading) {
     return <div>Loading...</div>;

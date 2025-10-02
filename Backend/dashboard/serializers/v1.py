@@ -4,10 +4,13 @@ from accounts.models import User
 from tasks.models import Task
 
 class UserSerializer(serializers.ModelSerializer):
+    tasks = serializers.IntegerField(source="tasks.count", read_only=True)
+    name = serializers.CharField(source="get_full_name", read_only=True)
+
     class Meta:
         model = User
-        fields = ["id", "first_name", "last_name", "email", "role", "date_joined"]
-        read_only_fields = ["id", "first_name", "last_name", "email", "date_joined"]  # Only role is writable
+        fields = ["id", "email", "name", "role", "date_joined", "tasks"]
+        read_only_fields =["id", "email", "name", "date_joined", "tasks"]  # Only role is writable
         
         
 class StatSerializer(serializers.Serializer):

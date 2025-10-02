@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAdminUser
 from tasks.models import Task
 from ..pagination import StandardResultsSetPagination
 from accounts.models import User
-from ..serializers.v1 import UserSerializer, StatSerializer
+from ..serializers.v1 import UserSerializer, StatSerializer, TaskSerializer
 
 
 class UserListView(ListAPIView):
@@ -41,3 +41,17 @@ class StatView(ListAPIView):
         }
 
         return [stats_data]
+
+
+class RecentUserListView(ListAPIView):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+    pagination_class = StandardResultsSetPagination
+    
+
+class RecentTaskListView(ListAPIView):
+    queryset = Task.objects.all().order_by('-created_at')
+    serializer_class = TaskSerializer
+    permission_classes = [IsAdminUser]
+    pagination_class = StandardResultsSetPagination

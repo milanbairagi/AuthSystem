@@ -100,6 +100,11 @@ Create a `.env` file in the Backend directory:
 SECRET_KEY=your-secret-key-here
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
+CORS_ALLOWED_ORIGINS=http://localhost:5173
+```
+Replace your-secret-key-here with a secure random key. Generate one using:
+```python
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 ```
 
 5. Run migrations:
@@ -153,7 +158,22 @@ The frontend will be available at `http://localhost:5173`
 - `PUT /api/v1/tasks/{id}/` - Update task
 - `DELETE /api/v1/tasks/{id}/` - Delete task
 
-## 📝 Task Model
+## 📜 API Documentation
+
+The project includes interactive API documentation powered by Swagger/OpenAPI:
+
+- **Swagger UI**: `http://127.0.0.1:8000/swagger/` - Interactive API documentation with a user-friendly interface for testing endpoints
+- **ReDoc**: `http://127.0.0.1:8000/redoc/` - Clean, responsive API documentation
+- **OpenAPI Schema**: `http://127.0.0.1:8000/swagger.json/` - Raw OpenAPI schema in JSON format
+
+These documentation endpoints provide:
+- Complete API endpoint listings
+- Request/response schemas
+- Interactive testing interface
+- Authentication examples
+- Parameter descriptions
+
+## �📝 Task Model
 
 Tasks have the following fields:
 - `title` (string, required) - Task title

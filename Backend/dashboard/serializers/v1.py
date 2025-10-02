@@ -3,7 +3,7 @@ from rest_framework import serializers
 from accounts.models import User
 from tasks.models import Task
 
-class UserSerializer(serializers.ModelSerializer):
+class AdminUserSerializer(serializers.ModelSerializer):
     tasks = serializers.IntegerField(source="tasks.count", read_only=True)
     name = serializers.CharField(source="get_full_name", read_only=True)
 
@@ -20,7 +20,7 @@ class StatSerializer(serializers.Serializer):
     total_completed_tasks = serializers.IntegerField()
     
     
-class TaskSerializer(serializers.ModelSerializer):
+class AdminTaskSerializer(serializers.ModelSerializer):
     owner_email = serializers.EmailField(source="owner.email", read_only=True)
     owner_name = serializers.CharField(source="owner.get_full_name", read_only=True)
     class Meta:

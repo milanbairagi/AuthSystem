@@ -102,7 +102,7 @@ DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 ```
-Replace your-secret-key-here with a secure random key. Generate one using:
+Replace `your-secret-key-here` with a secure random key. Generate one using:
 ```python
 python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 ```

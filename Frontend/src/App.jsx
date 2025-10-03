@@ -5,6 +5,7 @@ import { UserProvider } from "./contexts/userContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import AdminDashboard from "./pages/AdminDashboard";
 
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/admin",
+      element: <AdminDashboard />,
     },
   ]);
 

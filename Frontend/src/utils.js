@@ -20,4 +20,26 @@ function simplifyDateTime(isoString) {
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
-export { shallowEqual, simplifyDateTime };
+function formatTimeAgo(timestamp) {
+  const now = new Date();
+  const past = new Date(timestamp);
+  const diffInSeconds = Math.floor((now - past) / 1000);
+
+  if (diffInSeconds < 60) return `${diffInSeconds} seconds ago`;
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+  return `${Math.floor(diffInSeconds / 86400)} days ago`;
+};
+
+function getStatusColor(status) {
+  switch (status) {
+    case "completed":
+      return "bg-green-100 text-green-700";
+    case "pending":
+      return "bg-yellow-100 text-yellow-700";
+    case "in_progress":
+      return "bg-red-100 text-red-700";
+  }
+};
+
+export { shallowEqual, simplifyDateTime, formatTimeAgo, getStatusColor };

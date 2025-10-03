@@ -173,7 +173,7 @@ These documentation endpoints provide:
 - Authentication examples
 - Parameter descriptions
 
-## �📝 Task Model
+## 📝 Task Model
 
 Tasks have the following fields:
 - `title` (string, required) - Task title

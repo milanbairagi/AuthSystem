@@ -16,7 +16,7 @@ const UserTable = ({ users, changeRole }) => {
             <th className="px-4 py-3 text-left">Role</th>
             <th className="px-4 py-3 text-left">Date Joined</th>
             <th className="px-4 py-3 text-left">Tasks</th>
-            <th className="px-4 py-3 text-left">Action</th>
+            <th className="**px**-4 py-3 text-left">Action</th>
           </tr>
         </thead>
         <tbody>

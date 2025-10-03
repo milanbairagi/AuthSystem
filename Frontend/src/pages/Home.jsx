@@ -4,17 +4,20 @@ import { FaPlus } from "react-icons/fa";
 
 import { useUser } from "../contexts/userContext";
 import useTasks from "../hooks/useTasks";
-import { SecondaryButton } from "../components/Button";
+import PrimaryButton, { SecondaryButton } from "../components/Button";
 import TaskCard from "../components/TaskCard";
 import TaskWindow from "../components/TaskWindow";
 
 
-const Header = ({ user, handleLogout }) => {
+const Header = ({ user, handleLogout, goToAdminDashboard }) => {
   return (
     <div className="container mx-auto flex items-center justify-between w-full">
       <div>
         <h2 className="text-2xl font-bold">Welcome, {user.first_name} {user.last_name}!</h2>
         <p>Email: {user.email}</p>
+        {user.role === "admin" && (
+          <PrimaryButton text="Go to Admin Dashboard" onClick={goToAdminDashboard} />
+        )}
       </div>
       <SecondaryButton text="Log out" onClick={handleLogout} />
     </div>
@@ -70,6 +73,10 @@ const Home = () => {
     console.log("Tasks updated:");
   }, [tasks]);
 
+  const goToAdminDashboard = () => {
+    navigate("/admin");
+  };
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -80,7 +87,7 @@ const Home = () => {
 
       <TaskWindow task={selectedTask} open={open} handleClose={() => setOpen(false)} />
 
-      {user && <Header user={user} handleLogout={logoutUser} />}
+      {user && <Header user={user} handleLogout={logoutUser} goToAdminDashboard={goToAdminDashboard} />}
 
       <h3 className="text-gray-600 font-bold text-3xl my-4">Your Tasks</h3>
       {user && tasksLoading ? <div>Loading tasks...</div> : (

@@ -14,7 +14,7 @@ const useTasks = () => {
       setLoading(true);
       try {
         const response = await api.get(`v1/tasks/`);
-        setTasks(response.data);
+        setTasks(response.data.results);
       } catch (error) {
         console.error("Error fetching tasks:", error);
       } finally {

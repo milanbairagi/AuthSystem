@@ -1,6 +1,7 @@
 from rest_framework.generics import ListAPIView, UpdateAPIView
-from rest_framework.permissions import IsAdminUser
+# from rest_framework.permissions import IsAdminUser
 
+from accounts.permissions import IsAdminUser
 from tasks.models import Task
 from ..pagination import StandardResultsSetPagination
 from accounts.models import User
